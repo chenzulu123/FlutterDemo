@@ -67,6 +67,8 @@ class ExpansionPanelDemoState extends State<ExpansionPanelDemo> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar:AppBar(
+        // 标题居中
+        centerTitle: true,
         title:Text('ExpansionPanelDemo'),
         elevation: 0,
       ),

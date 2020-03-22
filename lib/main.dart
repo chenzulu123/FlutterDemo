@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'demo/basic_demo.dart';
 import 'demo/bloc/bloc_demo.dart';
+import 'demo/button/popup_menu_button_demo.dart';
 import 'demo/dialog/alert_dialog_demo.dart';
 import 'demo/expansion_panel_demo.dart';
 import 'demo/form/form_field_demo.dart';
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
 
         // ListViewDemo
         // 初始路由(默认打开的路由页面)
-        initialRoute: '/bloc_demo',
+        initialRoute: '/popup_button',
         routes: {
           // 跟路由
           '/home':(context) => MyHomePage(title: 'CHENZULU'),
@@ -48,6 +49,7 @@ class MyApp extends StatelessWidget {
           // ExpansionPanelDemo
           '/expansion_panel_demo': (context) => ExpansionPanelDemo(),
           '/bloc_demo': (context) => BlocDemo(),
+          '/popup_button': (context) => PopupMenuButtonDemo(),
 
         },
         //关闭appbar上的debug标识
@@ -92,6 +94,8 @@ class _MyHomePageState extends State<MyHomePage> {
       length: 3,
       child: Scaffold(
         appBar: AppBar(
+          // 标题居中显示
+          centerTitle: true,
           title: Text(widget.title),
           elevation: 0, //除去appbar的阴影
           //添加顶部tab栏

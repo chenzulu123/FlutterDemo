@@ -47,6 +47,8 @@ class Page extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        // 标题居中
+        centerTitle: true,
         title:Text(title),
       ),
       floatingActionButton: FloatingActionButton(

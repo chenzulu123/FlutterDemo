@@ -9,6 +9,8 @@ class SliverDemo extends StatelessWidget {
         body: CustomScrollView(slivers: <Widget>[
       //设置标题
       SliverAppBar(
+        // 标题居中
+        centerTitle: true,
         title: Text("CHENZULU"),
         // 固定标题栏
         pinned: true,

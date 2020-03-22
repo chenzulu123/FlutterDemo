@@ -24,12 +24,18 @@ class _AlertDialogDemoState extends State<AlertDialogDemo> {
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: Text('Cancle',style: TextStyle(color:Colors.grey),)),
+                  child: Text(
+                    'Cancle',
+                    style: TextStyle(color: Colors.grey),
+                  )),
               FlatButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: Text('OK',style: TextStyle(color:Colors.grey),)),
+                  child: Text(
+                    'OK',
+                    style: TextStyle(color: Colors.grey),
+                  )),
             ],
           );
         });
@@ -38,7 +44,11 @@ class _AlertDialogDemoState extends State<AlertDialogDemo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('AlertDialogDemo')),
+      appBar: AppBar(
+        // 标题居中
+        centerTitle: true,
+        title: Text('AlertDialogDemo')
+      ),
       body: Container(
         padding: EdgeInsets.all(16),
         child: Column(

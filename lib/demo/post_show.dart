@@ -10,6 +10,8 @@ class PostShow extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar:AppBar(
+        // 标题居中
+        centerTitle: true,
         title:Text('${post.title}'),
         
       ),
