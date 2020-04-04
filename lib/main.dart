@@ -53,7 +53,8 @@ class MyApp extends StatelessWidget {
 
         },
         //关闭appbar上的debug标识
-        debugShowCheckedModeBanner: false);
+        debugShowCheckedModeBanner: false
+      );
   }
 }
 
