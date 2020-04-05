@@ -10,11 +10,6 @@ class ListViewDemo extends StatelessWidget {
         children: <Widget>[
           Column(
             children: <Widget>[
-              //设置图片的显示比例
-              // AspectRatio(
-              //   aspectRatio:16/9,
-              //   child: Image.network(posts[index].imgUrl), 
-              // ),
               Image.network(posts[index].imgUrl),
               SizedBox(height: 16),
               Text(
@@ -34,10 +29,8 @@ class ListViewDemo extends StatelessWidget {
               splashColor: Colors.white.withOpacity(0.3),
               highlightColor: Colors.white.withOpacity(0.1),
               onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context)=>PostShow(post:posts[index]))
-                );
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => PostShow(post: posts[index])));
               },
             ),
           ))
@@ -48,9 +41,11 @@ class ListViewDemo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: posts.length,
-      itemBuilder: _listItemBuilder,
-    );
+    return Scaffold(
+        appBar: AppBar(title: Text('ListView')),
+        body: ListView.builder(
+          itemCount: posts.length,
+          itemBuilder: _listItemBuilder,
+        ));
   }
 }

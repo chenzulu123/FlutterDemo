@@ -11,20 +11,23 @@ import 'demo/navigator_demo.dart';
 import 'demo/snack_bar_demo.dart';
 import 'model/post.dart';
 import 'demo/sliver_demo.dart';
+import 'utils/comon.dart';
+import 'utils/routes.dart';
+
 void main() => runApp(MyApp());
+
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
         title: 'CHENZULU',
         theme: ThemeData(
-          // 设置appbar的背景颜色
-          primarySwatch: Colors.yellow,
-          //设置高亮选中的颜色
-          highlightColor: Color.fromRGBO(255, 255, 255, 0.5),
-          splashColor: Colors.white70
-        ),
-        home: MyHomePage(title: 'CHENZULU'),
+            // 设置appbar的背景颜色
+            primarySwatch: Colors.yellow,
+            //设置高亮选中的颜色
+            highlightColor: Color.fromRGBO(255, 255, 255, 0.5),
+            splashColor: Colors.white70),
+        home: MyHomePage(),
         // home: SliverDemo(),
         // home: NavigatorDemo(),
         // home: NavigatorDemo(),
@@ -32,40 +35,22 @@ class MyApp extends StatelessWidget {
 
         // ListViewDemo
         // 初始路由(默认打开的路由页面)
-        initialRoute: '/popup_button',
-        routes: {
-          // 跟路由
-          '/home':(context) => MyHomePage(title: 'CHENZULU'),
-          '/navigator':(context) => NavigatorDemo(),
-          // '/'标识路由的根
-          '/about': (context) => Page(title:'Auout'),
-          '/form_demo': (context) => FormDemo(),
-          // 注册表单
-          '/form_filed_demo': (context) => FormFieldDemo(),
-          //alert_dialog_demo
-          '/alert_dialog_demo': (context) => AlertDialogDemo(),
-          //snack_bar_demo
-          '/snack_bar_demo': (context) => SnackBarDemo(),
-          // ExpansionPanelDemo
-          '/expansion_panel_demo': (context) => ExpansionPanelDemo(),
-          '/bloc_demo': (context) => BlocDemo(),
-          '/popup_button': (context) => PopupMenuButtonDemo(),
-
-        },
+        initialRoute: '/home',
+        //路由配置
+        routes: route,
         //关闭appbar上的debug标识
-        debugShowCheckedModeBanner: false
-      );
+        debugShowCheckedModeBanner: false);
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-  final String title;
+  MyHomePage({Key key}) : super(key: key);
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  int _currentIndex = 0;
   Widget _listItemBuilder(BuildContext context, int index) {
     return Container(
         // 设置背景颜色
@@ -75,15 +60,15 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           children: <Widget>[
             //网络图片的展示方式
-            Image.network(posts[index].imgUrl),
-            // 设置小空挡
-            SizedBox(height: 16),
+            // Image.network(posts[index].imgUrl),
+            // // 设置小空挡
+            // SizedBox(height: 16),
             // 设置文字的样式
             Text(posts[index].title, style: Theme.of(context).textTheme.title),
-            Text(
-              posts[index].author,
-              style: Theme.of(context).textTheme.subtitle,
-            ),
+            // Text(
+            //   posts[index].author,
+            //   style: Theme.of(context).textTheme.subtitle,
+            // ),
             SizedBox(height: 16)
           ],
         ));
@@ -97,43 +82,33 @@ class _MyHomePageState extends State<MyHomePage> {
         appBar: AppBar(
           // 标题居中显示
           centerTitle: true,
-          title: Text(widget.title),
+          title: Text(currentTitle(_currentIndex)),
           elevation: 0, //除去appbar的阴影
           //添加顶部tab栏
-          bottom: TabBar(
-            unselectedLabelColor: Colors.black38,
-            indicatorColor: Colors.black54,
-            indicatorSize: TabBarIndicatorSize.label,
-            indicatorWeight: 1,
-            tabs: <Widget> [
-            Tab(
-              icon:Icon(Icons.local_florist)
-            ),
-            Tab(
-              icon:Icon(Icons.change_history)
-            ),
-            // Tab(
-            //   icon:Icon(Icons.directions_bike)
-            // ),
-            Tab(
-              icon:Icon(Icons.view_list)
-            ),
-          ]),
+          // bottom: TabBar(
+          //     unselectedLabelColor: Colors.black38,
+          //     indicatorColor: Colors.black54,
+          //     indicatorSize: TabBarIndicatorSize.label,
+          //     indicatorWeight: 1,
+          //     tabs: <Widget>[
+          //       Tab(icon: Icon(Icons.local_florist)),
+          //       Tab(icon: Icon(Icons.change_history)),
+          //       Tab(icon: Icon(Icons.view_list)),
+          //     ]),
         ),
         // body: ListView.builder(
         //   itemCount: posts.length,
         //   itemBuilder: _listItemBuilder,
         // ),
-        body:TabBarView(
-          children: <Widget> [
-            // Icon(Icons.local_florist,size: 128,color: Colors.black12,),
-            ListViewDemo(),
-            // Icon(Icons.change_history,size: 128,color: Colors.black12,),
-            BasicDemo(),
-            // Icon(Icons.directions_bike,size: 128,color: Colors.black12,),
-            SliverDemo()
-          ]
-        ),
+        // body: TabBarView(children: <Widget>[
+        //   // Icon(Icons.local_florist,size: 128,color: Colors.black12,),
+        //   ListViewDemo(),
+        //   // Icon(Icons.change_history,size: 128,color: Colors.black12,),
+        //   BasicDemo(),
+        //   // Icon(Icons.directions_bike,size: 128,color: Colors.black12,),
+        //   SliverDemo()
+        // ]),
+        body: currentPage(_currentIndex),
         //侧边栏
         drawer: Drawer(
             child: ListView(
@@ -163,6 +138,31 @@ class _MyHomePageState extends State<MyHomePage> {
             )
           ],
         )),
+        bottomNavigationBar: BottomNavigationBar(
+          items: [
+            BottomNavigationBarItem(
+                //选中的图标以及样式
+                activeIcon: Icon(
+                  Icons.home,
+                  color: Colors.blue[300],
+                ),
+                icon: Icon(Icons.home),
+                title: Text('主页')),
+            BottomNavigationBarItem(icon: Icon(Icons.search), title: Text('案例')),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.list), title: Text('常用组件')),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.people), title: Text('关于我们'))
+          ],
+          type: BottomNavigationBarType.fixed,
+          currentIndex: _currentIndex,
+          selectedItemColor: Colors.blue[300],
+          onTap: (index) {
+            setState(() {
+              _currentIndex = index;
+            });
+          },
+        ),
       ),
     );
   }
