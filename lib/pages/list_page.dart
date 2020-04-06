@@ -17,7 +17,10 @@ class _ListPageState extends State<ListPage> {
       child: Stack(
         children: <Widget>[
           Column(
+            //设置主轴的对齐方式
             mainAxisAlignment: MainAxisAlignment.start,
+            //设置交叉轴的对齐方式
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               SizedBox(height: 8),
               Text(

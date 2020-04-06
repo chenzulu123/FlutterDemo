@@ -6,28 +6,31 @@ class SliverDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title:Text('SliverDemo')
+      ),
         body: CustomScrollView(slivers: <Widget>[
       //设置标题
-      SliverAppBar(
-        // 标题居中
-        centerTitle: true,
-        title: Text("CHENZULU"),
-        // 固定标题栏
-        pinned: true,
-        // 设置标题栏为滚动
-        // floating: true,
-        //设置标题区域伸展的高度
-        // expandedHeight: 100,
-        // flexibleSpace: FlexibleSpaceBar(
-        //   title:Text(
-        //     '伸展区域的标题',
-        //     style: TextStyle(
-        //       fontSize:14,
-        //       color:Colors.grey
-        //     )
-        //   ),
-        // ),
-      ),
+      // SliverAppBar(
+      //   // 标题居中
+      //   centerTitle: true,
+      //   title: Text("CHENZULU"),
+      //   // 固定标题栏
+      //   pinned: true,
+      //   // 设置标题栏为滚动
+      //   // floating: true,
+      //   //设置标题区域伸展的高度
+      //   // expandedHeight: 100,
+      //   // flexibleSpace: FlexibleSpaceBar(
+      //   //   title:Text(
+      //   //     '伸展区域的标题',
+      //   //     style: TextStyle(
+      //   //       fontSize:14,
+      //   //       color:Colors.grey
+      //   //     )
+      //   //   ),
+      //   // ),
+      // ),
       //让内容显示安全区域内
       SliverSafeArea(
           //使用SliverPadding给SliverGrid增加内边距
